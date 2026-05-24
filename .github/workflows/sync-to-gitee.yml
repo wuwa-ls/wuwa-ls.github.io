@@ -1,0 +1,30 @@
+name: Sync to Gitee and Deploy Pages
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  sync-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Sync to Gitee
+        uses: wearerequired/git-mirror-action@master
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
+        with:
+          source-repo: "git@github.com:wuwa-ls/wuwa-ls.github.io.git"
+          destination-repo: "git@gitee.com:wuwa-ls/wuwa-ls.git"
+
+      - name: Trigger Gitee Pages Update
+        uses: yanglbme/gitee-pages-action@main
+        with:
+          gitee-username: wuwa-ls
+          gitee-password: ${{ secrets.GITEE_PASSWORD }}
+          gitee-repo: wuwa-ls/wuwa-ls
+          branch: main
