@@ -348,127 +348,6 @@ h2::after {
   border-radius: 2px;
 }
 
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-  gap: 24px;
-}
-
-.card {
-  background: var(--bg-card);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-light);
-  overflow: hidden;
-  transition: transform var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard), border-color var(--duration-fast) var(--ease-standard);
-  /* 解决 Safari 下圆角溢出问题 */
-  transform: translateZ(0); 
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-card);
-  border-color: var(--primary-glow);
-}
-
-/* 首页项目卡片缩略图 - 优化适配 */
-.project-thumbnail {
-  width: 100%;
-  height: 220px;           /* 调整高度，显示更佳 */
-  object-fit: cover;       /* 填满容器，防止拉伸 */
-  object-position: center; /* 居中裁剪 */
-  border-bottom: 1px solid var(--border-light);
-  transition: transform var(--duration-base) var(--ease-standard);
-  background-color: var(--bg-hover);
-}
-
-.card:hover .project-thumbnail { transform: scale(1.02); }
-
-.project-thumbnail-wrapper { overflow: hidden; }
-
-.project-info { padding: 24px; }
-
-.project-info h3 {
-  font-size: 1.25rem;
-  margin-bottom: 8px;
-  color: var(--text-main);
-}
-
-.project-info p {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  margin-bottom: 20px;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.project-link {
-  font-weight: 600;
-  color: var(--primary);
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-.project-link::after { content: '→'; transition: transform 0.2s; }
-.project-link:hover::after { transform: translateX(4px); }
-
-/* 子页面：详情大图样式 (新增) */
-.project-detail-card { padding: 40px; }
-
-.project-detail-desc {
-  max-width: 800px;
-  margin: 30px auto;
-  line-height: 1.8;
-  color: var(--text-muted);
-}
-
-.project-img {
-  display: block;
-  width: 100%;             /* 强制宽度撑满容器 */
-  max-width: 100%;         /* 防止超出父容器 */
-  height: auto;            /* 高度自动，保持比例 */
-  object-fit: contain;     /* 保证图片内容完整显示 */
-  border-radius: var(--radius-md);
-  margin: 32px auto;       /* 上下增加间距 */
-  box-shadow: var(--shadow-card);
-  border: 1px solid var(--border-light);
-}
-
-/* =========================================
-   6. Documents & Buttons
-   ========================================= */
-.publish-links-wrapper { text-align: center; margin-top: 40px; }
-
-.publish-links {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: center;
-  background: var(--bg-card);
-  padding: 12px;
-  border-radius: var(--radius-full);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border-light);
-}
-
-.publish-link {
-  padding: 10px 24px;
-  border-radius: var(--radius-full);
-  font-weight: 500;
-  color: var(--text-muted);
-  transition: transform var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard), background-color var(--duration-fast) var(--ease-standard);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.publish-link:hover {
-  background: var(--bg-hover);
-  color: var(--primary);
-  transform: translateY(-1px);
-}
-
 @keyframes intro-fade-up {
   from {
     opacity: 0;
@@ -507,27 +386,13 @@ footer {
   .nav-controls { gap: 8px; }
   .control-btn { padding: 6px 10px; }
   .logo { font-size: 1.1rem; }
-  .project-detail-card { padding: 24px 18px; }
 
   /* 手机端图片适配 */
   .avatar {
     width: 120px;
     height: 120px;
   }
-  .project-thumbnail {
-    height: 180px;
-  }
-  .project-img {
-    margin: 20px auto;
-    border-radius: 8px;
-  }
-  
-  .publish-links {
-    flex-direction: column;
-    border-radius: var(--radius-md);
-    width: 100%;
-  }
-  
+
   .intro-contact-links {
     gap: 10px;
     margin-top: 18px;
@@ -801,32 +666,4 @@ footer {
 /* 确保导航栏层级够高 */
 nav {
   z-index: 1000;
-}
-
-/* ... Previous CSS ... */
-
-/* =========================================
-   12. Project Tags (New)
-   ========================================= */
-.project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 20px; /* Space between tags and 'View Details' link */
-  margin-top: -12px;   /* Pull closer to description */
-}
-
-.project-tag {
-  font-size: 0.75rem;
-  padding: 3px 10px;
-  background: var(--bg-hover);
-  color: var(--primary);
-  border-radius: 4px;
-  font-weight: 500;
-  border: 1px solid var(--border-light);
-}
-
-/* Adjust paragraph margin in project info to accommodate tags */
-.project-info p {
-  margin-bottom: 16px; 
 }

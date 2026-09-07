@@ -91,6 +91,32 @@
     });
   }
 
+  function markdownToPlain(md) {
+    if (!md) return '';
+    return md
+      .replace(/```[\s\S]*?```/g, ' ')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+      .replace(/^#{1,6}\s+/gm, '')
+      .replace(/^\s*[-*+]\s+/gm, '')
+      .replace(/\*\*([^*]+)\*\*/g, '$1')
+      .replace(/__([^_]+)__/g, '$1')
+      .replace(/~~([^~]+)~~/g, '$1')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  async function fetchRepoReadme(repoName) {
+    const res = await fetch(`https://api.github.com/repos/wuwa-ls/${repoName}/readme`, {
+      cache: 'no-store',
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.download_url || null;
+  }
+
   async function initOpenSource() {
     const grid = qs('.opensource-grid');
     if (!grid) return;
@@ -100,7 +126,9 @@
 
     let repos;
     try {
-      const res = await fetch('https://api.github.com/users/wuwa-ls/repos?per_page=100');
+      const res = await fetch('https://api.github.com/users/wuwa-ls/repos?per_page=100', {
+        cache: 'no-store',
+      });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       repos = await res.json();
     } catch (err) {
@@ -118,12 +146,30 @@
       return;
     }
 
+    const cards = await Promise.all(selected.map(async (repo) => {
+      let desc = repo.description || t('opensource.noDesc');
+      try {
+        const readmeUrl = await fetchRepoReadme(repo.name);
+        if (readmeUrl) {
+          const mdRes = await fetch(readmeUrl, { cache: 'no-store' });
+          if (mdRes.ok) {
+            const plain = markdownToPlain(await mdRes.text());
+            if (plain) {
+              desc = plain.length > 200 ? `${plain.slice(0, 200)}…` : plain;
+            }
+          }
+        }
+      } catch (err) {
+        console.error(`[opensource] README load failed for ${repo.name}:`, err);
+      }
+      return { repo, desc };
+    }));
+
     clear(grid);
-    selected.forEach((repo) => {
+    cards.forEach(({ repo, desc }) => {
       const langTag = repo.language
         ? `<span class="os-tag">${repo.language}</span>`
         : '';
-      const desc = repo.description || t('opensource.noDesc');
 
       const card = document.createElement('div');
       card.className = 'os-card';

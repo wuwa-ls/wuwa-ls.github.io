@@ -7,7 +7,7 @@
   "intro": {
     "avatarAlt": "Avatar",
     "title": "Hi, I'm wuwa",
-    "desc": "Robotics enthusiast, Sophomore<br>Skilled in MCU application development<br>Exploring automation & AI technologies<br>Email: yanmingwang2026@163.com, 2714544899@qq.com"
+    "desc": "Robotics enthusiast, Junior<br>Skilled in MCU application development<br>Exploring automation & AI technologies<br>Email: yanmingwang2026@163.com, 2714544899@qq.com"
   },
   "timeline": {
     "title": "Experience Timeline",
@@ -59,15 +59,11 @@
     "feishu": "Feishu",
     "zhihu": "Zhihu"
   },
-  "projects": {
-    "imgAlt": "Project Cover",
-    "viewDetail": "View Details",
-    "empty": "No public projects yet"
-  },
   "opensource": {
-    "btnCode": "Source Code",
-    "btnDoc": "Documentation",
-    "empty": "No public open source projects yet"
+    "btnCode": "View Source",
+    "loading": "Loading open source projects...",
+    "error": "Failed to load open source projects, please try again later",
+    "noDesc": "No description"
   },
   "footer": {
     "copyright": "© 2024-2026 wuwa-ls | Homepage"
