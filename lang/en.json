@@ -1,0 +1,76 @@
+{
+  "nav": {
+    "projects": "Projects",
+    "opensource": "Open Source",
+    "timeline": "Timeline",
+    "skills": "Skills"
+  },
+  "intro": {
+    "avatarAlt": "Avatar",
+    "title": "Hi, I'm wuwa",
+    "desc": "Robotics enthusiast, Sophomore<br>Skilled in MCU application development<br>Exploring automation & AI technologies<br>Email: yanmingwang2026@163.com, 2714544899@qq.com"
+  },
+  "timeline": {
+    "title": "Experience Timeline",
+    "event1": {
+      "date": "2026.09",
+      "title": "Biped Robot Based on Tail Center-of-Gravity Regulation Mechanism",
+      "desc": "Stable motion control development and data processing."
+    },
+    "event2": {
+      "date": "2026.09",
+      "title": "3D3D Competition Low-Altitude Economy Track (Southwest Division)",
+      "desc": "Awarded Provincial First Prize."
+    },
+    "event3": {
+      "date": "2026.07",
+      "title": "Amphibious Spherical Robot",
+      "desc": "Motion control and sensor data processing."
+    },
+    "event4": {
+      "date": "2026.06",
+      "title": "National Undergraduate Computer Design Contest",
+      "desc": "Awarded Provincial Second Prize."
+    },
+    "event5": {
+      "date": "2026.05",
+      "title": "Path Planning & Tracking for Vehicle Using High-Precision GPS",
+      "desc": "Responsible for chassis motion control and high-precision GPS path planning data output."
+    },
+    "event6": {
+      "date": "2026.03",
+      "title": "National Undergraduate Robot Competition (RoboMaster) Alliance Tournament",
+      "desc": "Awarded Second Prize."
+    },
+    "event7": {
+      "date": "2025.07",
+      "title": "2025 National Undergraduate Electronics Design Contest",
+      "desc": "Responsible for electronic control of mobile vehicles."
+    }
+  },
+  "skills": {
+    "title": "Tech Stack",
+    "hardware": "Structural & Hardware Design",
+    "embedded": "Embedded Development",
+    "tools": "Toolchain"
+  },
+  "contact": {
+    "bilibili": "Bilibili",
+    "github": "GitHub",
+    "feishu": "Feishu",
+    "zhihu": "Zhihu"
+  },
+  "projects": {
+    "imgAlt": "Project Cover",
+    "viewDetail": "View Details",
+    "empty": "No public projects yet"
+  },
+  "opensource": {
+    "btnCode": "Source Code",
+    "btnDoc": "Documentation",
+    "empty": "No public open source projects yet"
+  },
+  "footer": {
+    "copyright": "© 2024-2026 wuwa-ls | Homepage"
+  }
+}

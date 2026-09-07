@@ -1,0 +1,76 @@
+{
+  "nav": {
+    "projects": "个人项目",
+    "opensource": "开源贡献",
+    "timeline": "时间轴",
+    "skills": "技术栈"
+  },
+  "intro": {
+    "avatarAlt": "头像",
+    "title": "你好，我是wuwa",
+    "desc": "机器人开发爱好者，大二在读<br>擅长MCU应用层开发<br>持续钻研自动化控制，AI相关技术<br>邮箱：yanmingwang2026@163.com、2714544899@qq.com"
+  },
+  "timeline": {
+    "title": "经历时间轴",
+    "event1": {
+      "date": "2026.09",
+      "title": "基于尾部重心调控机制的双足机器人",
+      "desc": "稳定运动控制开发和数据处理。"
+    },
+    "event2": {
+      "date": "2026.09",
+      "title": "3D3D大赛低空经济赛道西南赛赛区",
+      "desc": "获省级一等奖。"
+    },
+    "event3": {
+      "date": "2026.07",
+      "title": "水路两栖球形机器人",
+      "desc": "运动控制和传感器数据处理。"
+    },
+    "event4": {
+      "date": "2026.06",
+      "title": "全国大学生计算机设计大赛",
+      "desc": "获省级二等奖。"
+    },
+    "event5": {
+      "date": "2026.05",
+      "title": "载具基于高精度GPS的路径规划跟踪运动",
+      "desc": "负责底盘运动控制和高精度GPS的路径规划数据输出。"
+    },
+    "event6": {
+      "date": "2026.03",
+      "title": "全国大学生机器人竞赛（RoboMaster）机甲大师联盟赛",
+      "desc": "获二等奖。"
+    },
+    "event7": {
+      "date": "2025.07",
+      "title": "2025年全国大学生电子设计大赛",
+      "desc": "负责移动车辆的电子控制。"
+    }
+  },
+  "skills": {
+    "title": "技术栈",
+    "hardware": "结构与硬件设计",
+    "embedded": "嵌入式开发",
+    "tools": "开发工具链"
+  },
+  "contact": {
+    "bilibili": "哔哩哔哩",
+    "github": "代码仓库",
+    "feishu": "飞书",
+    "zhihu": "知乎"
+  },
+  "projects": {
+    "imgAlt": "项目封面",
+    "viewDetail": "查看详情",
+    "empty": "暂无公开的项目展示"
+  },
+  "opensource": {
+    "btnCode": "源代码",
+    "btnDoc": "文档",
+    "empty": "暂无公开的开源项目"
+  },
+  "footer": {
+    "copyright": "© 2024-2026 wuwa-ls | 个人主页"
+  }
+}

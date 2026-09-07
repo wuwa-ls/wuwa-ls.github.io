@@ -8,13 +8,8 @@
   }
 
   function getRootPath() {
-    const scripts = document.getElementsByTagName('script');
-    for (const script of scripts) {
-      const src = script.getAttribute('src');
-      if (src && src.includes('assets/js/i18n.js')) {
-        return src.replace('assets/js/i18n.js', '');
-      }
-    }
+    // lang 目录与 index.html 同级，直接返回空字符串
+    // 确保 fetch('lang/zh.json') 相对于页面根目录加载
     return '';
   }
 

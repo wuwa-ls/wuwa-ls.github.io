@@ -766,6 +766,15 @@ footer {
   justify-content: center;
 }
 
+/* 空状态提示 */
+.empty-hint {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  opacity: 0.7;
+}
+
 /* 防止图标拦截鼠标事件，确保点击穿透到 button */
 .theme-toggle i {
   pointer-events: none; 
