@@ -1,15 +1,5 @@
 (() => {
-  const PROJECT_TAG_LIBRARY = {
-    ROBOTICS: 'Robotics',
-    EMBEDDED: 'Embedded Systems',
-    MOTION_CONTROL: 'Motion Control',
-    MOTOR_CONTROL: 'Motor Control',
-    MECHANICAL_DESIGN: 'Mechanical Design',
-  };
-
-  const PROJECTS = [];
-
-  const OPEN_SOURCE_ITEMS = [];
+  const OPEN_SOURCE_REPOS = ['walking_robot', 'Spherical_robot', 'Map_Path_Tracking_Car'];
 
   const TIMELINE_EVENTS = [
     'timeline.event1',
@@ -71,16 +61,6 @@
     return window.i18n?.get ? window.i18n.get(key) : key;
   }
 
-  function renderSpanTags(tags, className) {
-    if (!Array.isArray(tags)) return '';
-    return tags.map((tag) => `<span class="${className}">${tag}</span>`).join('');
-  }
-
-  function renderProjectTags(tags) {
-    if (!Array.isArray(tags)) return '';
-    return `<div class="project-tags">${renderSpanTags(tags, 'project-tag')}</div>`;
-  }
-
   function initThemeToggle() {
     const toggleBtn = qs('.theme-toggle');
     const htmlEl = document.documentElement;
@@ -111,71 +91,57 @@
     });
   }
 
-  function initProjects() {
-    const grid = qs('.projects-grid');
-    if (!grid) return;
-    clear(grid);
-
-    if (PROJECTS.length === 0) {
-      grid.innerHTML = `<p class="empty-hint">${t('projects.empty')}</p>`;
-      return;
-    }
-
-    PROJECTS.forEach((project) => {
-      const tagsHtml = renderProjectTags(project.tags);
-
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML = `
-        <div class="project-thumbnail-wrapper">
-          <img src="${project.img}" alt="${t('projects.imgAlt')}" class="project-thumbnail">
-        </div>
-        <div class="project-info">
-          <h3>${t(project.titleKey)}</h3>
-          <p>${t(project.descKey)}</p>
-          ${tagsHtml}
-          <a href="${project.link}" class="project-link">${t('projects.viewDetail')}</a>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
-  }
-
-  function initOpenSource() {
+  async function initOpenSource() {
     const grid = qs('.opensource-grid');
     if (!grid) return;
     clear(grid);
 
-    if (OPEN_SOURCE_ITEMS.length === 0) {
-      grid.innerHTML = `<p class="empty-hint">${t('opensource.empty')}</p>`;
+    grid.innerHTML = `<p class="empty-hint">${t('opensource.loading')}</p>`;
+
+    let repos;
+    try {
+      const res = await fetch('https://api.github.com/users/wuwa-ls/repos?per_page=100');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      repos = await res.json();
+    } catch (err) {
+      console.error('[opensource] Load failed:', err);
+      grid.innerHTML = `<p class="empty-hint">${t('opensource.error')}</p>`;
       return;
     }
 
-    OPEN_SOURCE_ITEMS.forEach((item) => {
-      const tags = t(`${item.key}.tags`) || [];
-      const tagsHtml = renderSpanTags(tags, 'os-tag');
+    const selected = OPEN_SOURCE_REPOS
+      .map((name) => repos.find((r) => r.name === name))
+      .filter(Boolean);
 
-      let buttonsHtml = '';
-      if (item.linkCode) {
-        buttonsHtml += `<a href="${item.linkCode}" target="_blank" rel="noopener noreferrer" class="os-btn"><i class="fab fa-github"></i> ${t('opensource.btnCode')}</a>`;
-      }
-      if (item.linkDoc) {
-        buttonsHtml += `<a href="${item.linkDoc}" target="_blank" rel="noopener noreferrer" class="os-btn"><i class="fas fa-book"></i> ${t('opensource.btnDoc')}</a>`;
-      }
+    if (selected.length === 0) {
+      grid.innerHTML = `<p class="empty-hint">${t('opensource.error')}</p>`;
+      return;
+    }
+
+    clear(grid);
+    selected.forEach((repo) => {
+      const langTag = repo.language
+        ? `<span class="os-tag">${repo.language}</span>`
+        : '';
+      const desc = repo.description || t('opensource.noDesc');
 
       const card = document.createElement('div');
       card.className = 'os-card';
       card.innerHTML = `
         <div class="os-header">
-          <div class="os-title">${t(`${item.key}.title`)}</div>
-          <i class="fas fa-code-branch" style="color:var(--primary); opacity:0.5;"></i>
+          <a class="os-title" href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a>
+          <span class="os-stars"><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
         </div>
-        <p class="os-desc">${t(`${item.key}.desc`)}</p>
-        <div class="os-tags">${tagsHtml}</div>
-        <div class="os-actions">${buttonsHtml}</div>
+        <p class="os-desc">${desc}</p>
+        <div class="os-tags">${langTag}</div>
+        <div class="os-actions">
+          <a class="os-btn" href="${repo.html_url}" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> ${t('opensource.btnCode')}</a>
+        </div>
       `;
       grid.appendChild(card);
     });
+
+    applyReveal(qsa('.opensource-grid .os-card'));
   }
 
   function initTimeline() {
@@ -259,15 +225,7 @@
     });
   }
 
-  function initRevealMotion() {
-    const targets = [
-      ...qsa('.project-detail-card'),
-      ...qsa('.projects-grid .card'),
-      ...qsa('.opensource-grid .os-card'),
-      ...qsa('.timeline-container .timeline-item'),
-      ...qsa('.skills-wrapper .skill-category'),
-    ];
-
+  function applyReveal(targets) {
     if (!targets.length) return;
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -298,6 +256,13 @@
     targets.forEach((el) => observer.observe(el));
   }
 
+  function initRevealMotion() {
+    applyReveal([
+      ...qsa('.timeline-container .timeline-item'),
+      ...qsa('.skills-wrapper .skill-category'),
+    ]);
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     initThemeToggle();
     initLangToggle();
@@ -306,7 +271,6 @@
 
   window.addEventListener('i18nLoaded', () => {
     console.log('[main] i18n loaded, rendering content...');
-    initProjects();
     initOpenSource();
     initTimeline();
     initTechStack();

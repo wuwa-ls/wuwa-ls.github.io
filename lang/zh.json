@@ -60,15 +60,11 @@
     "feishu": "飞书",
     "zhihu": "知乎"
   },
-  "projects": {
-    "imgAlt": "项目封面",
-    "viewDetail": "查看详情",
-    "empty": "暂无公开的项目展示"
-  },
   "opensource": {
-    "btnCode": "源代码",
-    "btnDoc": "文档",
-    "empty": "暂无公开的开源项目"
+    "btnCode": "查看源码",
+    "loading": "正在加载开源项目...",
+    "error": "加载开源项目失败，请稍后重试",
+    "noDesc": "暂无描述"
   },
   "footer": {
     "copyright": "© 2024-2026 wuwa-ls | 个人主页"

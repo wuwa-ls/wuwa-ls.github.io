@@ -582,6 +582,24 @@ footer {
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-main);
+  text-decoration: none;
+}
+
+.os-title:hover {
+  color: var(--primary);
+}
+
+.os-stars {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.os-stars i {
+  color: var(--primary);
 }
 
 .os-desc {
